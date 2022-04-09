@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GuildPet
 {
-    internal class HydraGetter
+    public class HydraGetter
     {
         public Player getHydra(int heads)
         {

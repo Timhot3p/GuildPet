@@ -4,6 +4,9 @@ namespace GuildPet
     {
         private Player[] playerList = new Player[50];
         private int playerNumber = 0;
+        private Player strPet;
+        private Player dexPet;
+        private Player intPet;
         public Form1()
         {
             InitializeComponent();
@@ -94,13 +97,13 @@ namespace GuildPet
         private void calcPet_Click(object sender, EventArgs e)            
         {
             generatePlayers();
-            Player strPet = getPet(this.playerList, 1);
-            Player dexPet = getPet(this.playerList, 2);
-            Player intPet = getPet(this.playerList, 3);     
+            this.strPet = getPet(this.playerList, 1);
+            this.dexPet = getPet(this.playerList, 2);
+            this.intPet = getPet(this.playerList, 3);     
 
-            petStrength.Text = strPet.toString();
-            petDexterity.Text = dexPet.toString();
-            petIntelligence.Text = intPet.toString();         
+            petStrength.Text = this.strPet.toString();
+            petDexterity.Text = this.dexPet.toString();
+            petIntelligence.Text = this.intPet.toString();         
 
          }
 
@@ -200,7 +203,12 @@ namespace GuildPet
 
         private void simulate_Click(object sender, EventArgs e)
         {
-
+            HydraGetter h = new HydraGetter();
+            int hydra = 1;
+            try { hydra = Int32.Parse(hydraHeads.Text); } catch { }           
+            Fight fs = new Fight(this.strPet, h.getHydra(hydra));
+            Fight fd = new Fight(this.dexPet, h.getHydra(hydra));
+            Fight fi = new Fight(this.intPet, h.getHydra(hydra));
         }
     }
 }
