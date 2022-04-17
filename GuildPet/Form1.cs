@@ -97,19 +97,20 @@ namespace GuildPet
                 default: return 0.0f;
             }
         }
-        private void calcPet_Click(object sender, EventArgs e)            
-        {
+        private void calcPets() {
             generatePlayers();
             this.strPet = getPet(this.playerList, 1);
             this.dexPet = getPet(this.playerList, 2);
-            this.intPet = getPet(this.playerList, 3);     
+            this.intPet = getPet(this.playerList, 3);
 
             petStrength.Text = this.strPet.toString();
             petDexterity.Text = this.dexPet.toString();
-            petIntelligence.Text = this.intPet.toString();         
-
-         }
-
+            petIntelligence.Text = this.intPet.toString();
+        }
+        private void calcPet_Click(object sender, EventArgs e)            
+        {
+            calcPets();
+        }
         private string playerListToString(Player[] players) {
             string res = "";
             for (int i = 0; i < players.Length; i++) {
@@ -209,6 +210,7 @@ namespace GuildPet
 
         private void simulate_Click(object sender, EventArgs e)
         {
+            calcPets();
             int hydraNr = 1;
             try { hydraNr = Int32.Parse(hydraHeads.Text); } catch { }
             int playerNr = 50;

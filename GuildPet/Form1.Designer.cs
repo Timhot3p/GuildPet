@@ -311,7 +311,7 @@
             this.Controls.Add(this.calcPet);
             this.Controls.Add(this.input);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Hydra Simulator";
             this.ResumeLayout(false);
             this.PerformLayout();
 
