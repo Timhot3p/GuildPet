@@ -55,20 +55,21 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.iterationsInput = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // input
             // 
-            this.input.Location = new System.Drawing.Point(27, 21);
+            this.input.Location = new System.Drawing.Point(187, 21);
             this.input.MaxLength = 100000;
             this.input.Multiline = true;
             this.input.Name = "input";
-            this.input.Size = new System.Drawing.Size(864, 67);
+            this.input.Size = new System.Drawing.Size(704, 67);
             this.input.TabIndex = 1;
             // 
             // calcPet
             // 
-            this.calcPet.Location = new System.Drawing.Point(487, 108);
+            this.calcPet.Location = new System.Drawing.Point(484, 106);
             this.calcPet.Name = "calcPet";
             this.calcPet.Size = new System.Drawing.Size(98, 23);
             this.calcPet.TabIndex = 5;
@@ -78,7 +79,7 @@
             // 
             // petDexterity
             // 
-            this.petDexterity.Location = new System.Drawing.Point(424, 188);
+            this.petDexterity.Location = new System.Drawing.Point(424, 146);
             this.petDexterity.Multiline = true;
             this.petDexterity.Name = "petDexterity";
             this.petDexterity.Size = new System.Drawing.Size(214, 50);
@@ -86,7 +87,7 @@
             // 
             // petStrength
             // 
-            this.petStrength.Location = new System.Drawing.Point(187, 188);
+            this.petStrength.Location = new System.Drawing.Point(187, 146);
             this.petStrength.Multiline = true;
             this.petStrength.Name = "petStrength";
             this.petStrength.Size = new System.Drawing.Size(192, 50);
@@ -94,7 +95,7 @@
             // 
             // petIntelligence
             // 
-            this.petIntelligence.Location = new System.Drawing.Point(689, 188);
+            this.petIntelligence.Location = new System.Drawing.Point(689, 146);
             this.petIntelligence.Multiline = true;
             this.petIntelligence.Name = "petIntelligence";
             this.petIntelligence.Size = new System.Drawing.Size(200, 50);
@@ -103,27 +104,30 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(262, 162);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label3.Location = new System.Drawing.Point(247, 233);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 15);
+            this.label3.Size = new System.Drawing.Size(69, 21);
             this.label3.TabIndex = 12;
             this.label3.Text = "Strength";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(509, 162);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label4.Location = new System.Drawing.Point(500, 233);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 15);
+            this.label4.Size = new System.Drawing.Size(72, 21);
             this.label4.TabIndex = 13;
             this.label4.Text = "Dexterity";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(762, 162);
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label5.Location = new System.Drawing.Point(753, 233);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 15);
+            this.label5.Size = new System.Drawing.Size(89, 21);
             this.label5.TabIndex = 15;
             this.label5.Text = "Intelligence";
             // 
@@ -163,7 +167,8 @@
             // 
             // simulate
             // 
-            this.simulate.Location = new System.Drawing.Point(424, 284);
+            this.simulate.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.simulate.Location = new System.Drawing.Point(424, 296);
             this.simulate.Name = "simulate";
             this.simulate.Size = new System.Drawing.Size(214, 44);
             this.simulate.TabIndex = 20;
@@ -278,11 +283,22 @@
             this.iterationsInput.TabIndex = 34;
             this.iterationsInput.Text = "100";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(95, 39);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 21);
+            this.label8.TabIndex = 35;
+            this.label8.Text = "Input";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(903, 537);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.iterationsInput);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -345,5 +361,6 @@
         private Label label6;
         private Label label7;
         private TextBox iterationsInput;
+        private Label label8;
     }
 }
