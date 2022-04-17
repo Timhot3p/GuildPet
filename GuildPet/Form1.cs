@@ -203,12 +203,18 @@ namespace GuildPet
 
         private void simulate_Click(object sender, EventArgs e)
         {
-            HydraGetter h = new HydraGetter();
-            int hydra = 1;
-            try { hydra = Int32.Parse(hydraHeads.Text); } catch { }           
-            Fight fs = new Fight(this.strPet, h.getHydra(hydra));
-            Fight fd = new Fight(this.dexPet, h.getHydra(hydra));
-            Fight fi = new Fight(this.intPet, h.getHydra(hydra));
+            int hydraNr = 1;
+            try { hydraNr = Int32.Parse(hydraHeads.Text); } catch { }
+            Player testHydra = HydraGetter.getHydra(hydraNr);
+            Fight fs = new Fight(this.strPet, testHydra);
+            var results = fs.doFight();
+            strOutput.Text = results.winA + ", " + results.hpWinner;
+            Fight fd = new Fight(this.strPet, testHydra);
+            var resultd = fd.doFight();
+            dexOutput.Text = resultd.winA + ", " + resultd.hpWinner;
+            Fight fi = new Fight(this.strPet, testHydra);
+            var resulti = fi.doFight();
+            intOutput.Text = resulti.winA + ", " + resulti.hpWinner;
         }
     }
 }

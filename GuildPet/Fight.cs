@@ -151,7 +151,7 @@ namespace GuildPet
             long hpWinner = winA ? this.restHpA : this.restHpB;
             return (winA, hpWinner);
         }
-        public float getDmgReduction(Player attacker, Player defender) {
+        public static float getDmgReduction(Player attacker, Player defender) {
             if (attacker.Cls == 2)
             {
                 return 0.0f;
@@ -175,7 +175,7 @@ namespace GuildPet
             }
         }
 
-        public float getDodgeChances(Player attacker, Player defender)
+        public static float getDodgeChances(Player attacker, Player defender)
         {
             if (attacker.Cls == 2 && defender.Cls != 6)
             {
@@ -200,7 +200,7 @@ namespace GuildPet
             }
         }
 
-        public int getReducingStat(Player attacker, Player defender) {
+        public static int getReducingStat(Player attacker, Player defender) {
             switch (attacker.Cls) {
                 case 1: return defender.Strength / 2;
                 case 2: return defender.Intelligence / 2;
@@ -214,7 +214,7 @@ namespace GuildPet
                 default: return 0;
             }
         }
-        public int getMinMaxDamage(Player attacker, Player defender, bool max) {
+        public static int getMinMaxDamage(Player attacker, Player defender, bool max) {
             int damage = 0;
             int wpndmg = max ? attacker.MaxDmg : attacker.MinDmg;
             int reducedMain = Math.Max(attacker.getMainStat() - getReducingStat(attacker, defender), attacker.getMainStat() / 2); ;
@@ -224,7 +224,7 @@ namespace GuildPet
             }
             return damage;
         }                  
-        public long getFireballDmg(Player attacker, Player defender)            
+        public static long getFireballDmg(Player attacker, Player defender)            
         {
             if (attacker.Cls == 5 & defender.Cls != 2 && defender.Cls != 5) {
                 switch (defender.Cls) {

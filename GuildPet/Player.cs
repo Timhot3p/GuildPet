@@ -76,7 +76,7 @@ namespace GuildPet
                     break;
                 default: this.hp = 0; break;
             }
-        }
+        }  
 
         public Player(string name, int level, int cls, int mindmg, int maxdmg, int strength, int dexterity, int intelligence, int constitution, int luck, long hp, int armor)
         {
