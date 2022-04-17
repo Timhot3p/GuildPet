@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace GuildPet
 {
@@ -64,33 +65,54 @@ namespace GuildPet
         private void executeFireball() {
             if (this.playerB.Cls == 5)
             {
-                this.restHpA -= getFireballDmg(this.playerB, this.playerB);
-                round++;
+                long fireball1 = getFireballDmg(this.playerB, this.playerA);
+                this.restHpA -= fireball1;
+
+               //Debug.WriteLine(round + ": " + playerB.Name + " fireballs " + playerA.Name + ": " + fireball1);
+
+                this.round++;
+
             }
             if (this.playerA.Cls == 5)
             {
-                this.restHpB -= getFireballDmg(this.playerA, this.playerB);
-                round++;
+                long fireball2 = getFireballDmg(this.playerA, this.playerB);
+                this.restHpB -= fireball2;
+
+                //Debug.WriteLine(round + ": " + playerA.Name + " fireballs " + playerB.Name + ": " + fireball2);
+
+                this.round++;
+
             }
         }        
         private void aHitsb() {
-            if (rng() > this.dodgeB) { 
-                int baseDmg = this.mindmgA + (int) (rng() * (this.maxdmgA - this.mindmgA));
+            if (rng() > this.dodgeB)
+            {
+                int baseDmg = this.mindmgA + (int)(rng() * (this.maxdmgA - this.mindmgA));
                 int crit = (rng() > 0.5) ? 2 : 1;
-                int totaldamage = (int) (crit * (1 + this.round / 6) * baseDmg * (1 - this.redB));
+                int totaldamage = (int) (baseDmg * crit * (1.0f + this.round / 6.0f) * (1 - this.redB));
                 this.restHpB -= totaldamage;
+
+                //Debug.WriteLine(round + ": " + playerA.Name + " to " + playerB.Name + ": " + totaldamage + " (" + (crit > 1) + ")");
             }
-            round++;
+            else
+            {
+                //Debug.WriteLine(round + ": " + playerB.Name + " dodges " + playerA.Name);
+            }
         }
         private void bHitsa() {
             if (rng() > this.dodgeA)
             {
                 int baseDmg = this.mindmgB + (int)(rng() * (this.maxdmgB - this.mindmgB));
                 int crit = (rng() > 0.5) ? 2 : 1;
-                int totaldamage = (int) (crit * (1 + this.round / 6) * baseDmg * (1 - this.redA));
+                int totaldamage = (int) (baseDmg * crit * (1.0f + this.round / 6.0f) * (1 - this.redA));
                 this.restHpA -= totaldamage;
+
+               //Debug.WriteLine(round + ": " + playerB.Name + " to " + playerA.Name + ": " + totaldamage + " (" + (crit > 1) + ")");
             }
-            round++;
+            else
+            {
+                //Debug.WriteLine(round + ": " + playerA.Name + " dodges " + playerB.Name);
+            }
         }
         private bool hasEnded() {
             if (restHpA <= 0) {
@@ -139,9 +161,10 @@ namespace GuildPet
         {
             if (this.turnA) { aHitsb(); } else { bHitsa(); };
             this.turnA = !this.turnA;
-            round++;
+            this.round++;
         }
         public (bool winA, long hpWinner) doFight() {
+            //Debug.WriteLine("Armor: " + this.playerA.Name + ": " + this.redA + ", " + playerB.Name + ": " + this.redB);
             executeFireball();
             while (!hasEnded()) {
                 nextHit();
@@ -160,15 +183,15 @@ namespace GuildPet
             {
                 switch (defender.Cls)
                 {
-                    case 1: return (float)Math.Min(defender.Armor / (attacker.Level * 100), 0.5);
-                    case 2: return (float)Math.Min(defender.Armor / (attacker.Level * 100), 0.1);
-                    case 3: return (float)Math.Min(defender.Armor / (attacker.Level * 100), 0.25);
-                    case 4: return (float)Math.Min(defender.Armor / (attacker.Level * 100), 0.25);
-                    case 5: return (float)(Math.Min(defender.Armor / (attacker.Level * 100), 0.1) + 0.4);
-                    case 6: return (float)Math.Min(defender.Armor / (attacker.Level * 200), 0.25);
-                    case 7: return (float)Math.Min(defender.Armor / (attacker.Level * 100), 0.5);
-                    case 8: return (float)Math.Min(defender.Armor / (attacker.Level * 100), 0.25);
-                    case 9: return (float)Math.Min(defender.Armor / (attacker.Level * 50), 0.5);
+                    case 1: return Math.Min(defender.Armor / (attacker.Level * 100.0f), 0.5f);
+                    case 2: return Math.Min(defender.Armor / (attacker.Level * 100.0f), 0.1f);
+                    case 3: return Math.Min(defender.Armor / (attacker.Level * 100.0f), 0.25f);
+                    case 4: return Math.Min(defender.Armor / (attacker.Level * 100.0f), 0.25f);
+                    case 5: return (Math.Min(defender.Armor / (attacker.Level * 100.0f), 0.1f) + 0.4f);
+                    case 6: return Math.Min(defender.Armor / (attacker.Level * 200.0f), 0.25f);
+                    case 7: return Math.Min(defender.Armor / (attacker.Level * 100.0f), 0.5f);
+                    case 8: return Math.Min(defender.Armor / (attacker.Level * 100.0f), 0.25f);
+                    case 9: return Math.Min(defender.Armor / (attacker.Level * 50.0f), 0.5f);
                     default: return 0.0f;
 
                 }
@@ -214,12 +237,21 @@ namespace GuildPet
                 default: return 0;
             }
         }
+
+        public static int getReducedMain(Player attacker, Player defender) {
+
+            int reducedMain = Math.Max(attacker.getMainStat() - getReducingStat(attacker, defender), attacker.getMainStat() / 2);          
+            return reducedMain;
+        }
         public static int getMinMaxDamage(Player attacker, Player defender, bool max) {
             int damage = 0;
-            int wpndmg = max ? attacker.MaxDmg : attacker.MinDmg;
-            int reducedMain = Math.Max(attacker.getMainStat() - getReducingStat(attacker, defender), attacker.getMainStat() / 2); ;
+            int wpndmg = max ? attacker.MaxDmg : attacker.MinDmg;            
+            int reducedMain = getReducedMain(attacker, defender); 
             damage = wpndmg * (reducedMain/10 + 1);
-            if (attacker.Cls == 2 && defender.Cls == 6) {
+            if (attacker.Cls == 4) {
+                damage = (int) (damage * 0.625);
+            }
+            else if (attacker.Cls == 2 && defender.Cls == 6) {
                 damage *= 2;
             }
             return damage;

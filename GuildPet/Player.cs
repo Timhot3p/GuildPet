@@ -209,7 +209,7 @@ namespace GuildPet
         }
         public String toString()
         {
-            return "Name: " + this.name + ", Level: " + this.level + ", Klasse: " + this.getClassName() + ", Waffe: " + this.mindmg + " - " + this.maxdmg + ", Stärke: " + this.strength + ", Geschick: " + this.dexterity + ", Intelligenz: " + this.intelligence + ", Ausdauer: " + this.constitution + ", Glück: " + this.luck + ", Rüstung: " + this.armor + ", Leben: " + this.hp + System.Environment.NewLine;
+            return "Name: " + this.name + ", Level: " + this.level + ", Class: " + this.getClassName() + ", Weapon: " + this.mindmg + " - " + this.maxdmg + ", Strength: " + this.strength + ", Dexterity: " + this.dexterity + ", Intelligence: " + this.intelligence + ", Constitution: " + this.constitution + ", Luck: " + this.luck + ", Armor: " + this.armor + ", Hp: " + this.hp + System.Environment.NewLine;
 
         }
     }

@@ -1,3 +1,6 @@
+using System.Globalization;
+using System.Diagnostics;
+
 namespace GuildPet
 {
     public partial class Form1 : Form
@@ -116,7 +119,7 @@ namespace GuildPet
         }
         private Player getPet(Player[] players, int main)
         {
-
+            string name = "NoPet";
             int level = 0;
             int mindmg = 0;
             int maxdmg = 0;
@@ -128,7 +131,7 @@ namespace GuildPet
 
             if (players == null)
             {
-                return new Player("Pet", level, main, mindmg, maxdmg, strength, dexterity, intelligence, constitution, luck);
+                return new Player(name, level, main, mindmg, maxdmg, strength, dexterity, intelligence, constitution, luck);
             }
 
             Player[] sortedPlayers = getSortedList(players);
@@ -140,12 +143,12 @@ namespace GuildPet
 
             for (int i = 0; i < n; i++)
             {
-                level += players[i].Level;                
-                mainstat += players[i].getMainStat();
-                sidestat1 += players[i].getSideStat1();
-                sidestat2 += players[i].getSideStat2();
-                constitution += players[i].Constitution;
-                luck += players[i].Luck;
+                level += sortedPlayers[i].Level;                
+                mainstat += sortedPlayers[i].getMainStat();
+                sidestat1 += sortedPlayers[i].getSideStat1();
+                sidestat2 += sortedPlayers[i].getSideStat2();
+                constitution += sortedPlayers[i].Constitution;
+                luck += sortedPlayers[i].Luck;
             }
 
             level = level / 25;
@@ -155,6 +158,7 @@ namespace GuildPet
             switch (main)
             {
                 case 1:
+                    name = "StrPet";
                     strength = mainstat / 10;
                     dexterity = sidestat1 / 10;
                     intelligence = sidestat2 / 10;
@@ -162,6 +166,7 @@ namespace GuildPet
                     maxdmg = (int) ((level + 1) * 2);
                     break;
                 case 2:
+                    name = "DexPet";
                     strength = sidestat1 / 10;
                     dexterity = mainstat / 10;
                     intelligence = sidestat2 / 10;
@@ -169,6 +174,7 @@ namespace GuildPet
                     maxdmg = (int) ((level + 1) * 2.5);
                     break;
                 case 3:
+                    name = "IntPet";
                     strength = sidestat1 / 10;
                     dexterity = sidestat2 / 10;
                     intelligence = mainstat / 10;
@@ -178,7 +184,7 @@ namespace GuildPet
                 default:
                     break;
             }
-            return new Player("Pet", level, mainToClass(main), mindmg, maxdmg, strength, dexterity, intelligence, constitution, luck);
+            return new Player(name, level, mainToClass(main), mindmg, maxdmg, strength, dexterity, intelligence, constitution, luck);
         }
         private Player[] getSortedList(Player[] players)
         {
@@ -205,16 +211,78 @@ namespace GuildPet
         {
             int hydraNr = 1;
             try { hydraNr = Int32.Parse(hydraHeads.Text); } catch { }
-            Player testHydra = HydraGetter.getHydra(hydraNr);
-            Fight fs = new Fight(this.strPet, testHydra);
-            var results = fs.doFight();
-            strOutput.Text = results.winA + ", " + results.hpWinner;
-            Fight fd = new Fight(this.strPet, testHydra);
-            var resultd = fd.doFight();
-            dexOutput.Text = resultd.winA + ", " + resultd.hpWinner;
-            Fight fi = new Fight(this.strPet, testHydra);
-            var resulti = fi.doFight();
-            intOutput.Text = resulti.winA + ", " + resulti.hpWinner;
+            int playerNr = 50;
+            try { playerNr = Int32.Parse(playersInput.Text); } catch { }
+            int iterations = 100;
+            try { iterations = Int32.Parse(iterationsInput.Text); } catch { }
+
+
+            Player hydra = HydraGetter.getHydra(hydraNr);
+            long[] restHp = new long[] { hydra.Hp, hydra.Hp, hydra.Hp };
+            long[] avrgDmg = new long[] { 0, 0, 0 };
+            int[] cnt = new int[] { 0, 0, 0 };
+            float[] playersNeeded = new float[] { 0.0f, 0.0f, 0.0f };
+            long[] avrgRestHp = new long[] { 0, 0, 0 };
+            float[] won = new float[] { 0.0f, 0.0f, 0.0f };
+
+            for (int c = 0; c < 3; c++)
+            {
+                Player clsPet;
+                switch (c) {
+                    case 0: clsPet = this.strPet;
+                            break;
+                    case 1: clsPet = this.dexPet;
+                        break;
+                    case 2: clsPet = this.intPet;
+                        break;
+                    default: clsPet = this.strPet;
+                        break;                
+                }
+
+                for (int n = 0; n < iterations; n++)
+                {
+                    restHp[c] = hydra.Hp;
+                    for (int i = 0; i < playerNr; i++)
+                    {
+                        Fight f = new Fight(clsPet, hydra);
+                        var results = f.doFight();
+                        if (!results.winA) {
+                            long dmg = hydra.Hp - results.hpWinner;
+                            restHp[c] -= dmg;
+                            avrgDmg[c] += dmg;
+                            cnt[c]++;
+                        }
+                        else {
+                            restHp[c] = 0;
+                            avrgDmg[c] += hydra.Hp;
+                            cnt[c]++;
+                            break;
+                        }
+                        if(restHp[c] < 0)
+                        {
+                            restHp[c] = 0;
+                            break;
+                        } 
+                    }
+                    avrgRestHp[c] += restHp[c];
+                    won[c] += (restHp[c] > 0) ? 0.0f : 1.0f;
+                }
+                avrgRestHp[c] = (avrgRestHp[c] / iterations);
+                won[c] = 100.0f * won[c] / iterations;
+                avrgDmg[c] = avrgDmg[c] / cnt[c];
+                playersNeeded[c] = (float)hydra.Hp / avrgDmg[c];
+            }
+            strOutput1.Text = won[0] + "%";
+            strOutput2.Text = Math.Round((100.0f * avrgRestHp[0] / hydra.Hp), 2) + "%";
+            strOutput3.Text = "" + Math.Round(playersNeeded[0], 2);
+
+            dexOutput1.Text = won[1] + "%";
+            dexOutput2.Text = Math.Round((100.0f * avrgRestHp[1] / hydra.Hp), 2) + "%";
+            dexOutput3.Text = "" + Math.Round(playersNeeded[1], 2);
+
+            intOutput1.Text = won[2] + "%";
+            intOutput2.Text = Math.Round((100.0f * avrgRestHp[2] / hydra.Hp), 2) + "%";
+            intOutput3.Text = "" + Math.Round(playersNeeded[2], 2);
         }
     }
 }
