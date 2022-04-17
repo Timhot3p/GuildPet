@@ -1,0 +1,17 @@
+C:\Users\timbi\source\repos\GuildPet\GuildPet\bin\Release\net6.0-windows\GuildPet.exe
+C:\Users\timbi\source\repos\GuildPet\GuildPet\bin\Release\net6.0-windows\GuildPet.deps.json
+C:\Users\timbi\source\repos\GuildPet\GuildPet\bin\Release\net6.0-windows\GuildPet.runtimeconfig.json
+C:\Users\timbi\source\repos\GuildPet\GuildPet\bin\Release\net6.0-windows\GuildPet.dll
+C:\Users\timbi\source\repos\GuildPet\GuildPet\bin\Release\net6.0-windows\ref\GuildPet.dll
+C:\Users\timbi\source\repos\GuildPet\GuildPet\bin\Release\net6.0-windows\GuildPet.pdb
+C:\Users\timbi\source\repos\GuildPet\GuildPet\obj\Release\net6.0-windows\GuildPet.csproj.AssemblyReference.cache
+C:\Users\timbi\source\repos\GuildPet\GuildPet\obj\Release\net6.0-windows\GuildPet.Form1.resources
+C:\Users\timbi\source\repos\GuildPet\GuildPet\obj\Release\net6.0-windows\GuildPet.csproj.GenerateResource.cache
+C:\Users\timbi\source\repos\GuildPet\GuildPet\obj\Release\net6.0-windows\GuildPet.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\timbi\source\repos\GuildPet\GuildPet\obj\Release\net6.0-windows\GuildPet.AssemblyInfoInputs.cache
+C:\Users\timbi\source\repos\GuildPet\GuildPet\obj\Release\net6.0-windows\GuildPet.AssemblyInfo.cs
+C:\Users\timbi\source\repos\GuildPet\GuildPet\obj\Release\net6.0-windows\GuildPet.csproj.CoreCompileInputs.cache
+C:\Users\timbi\source\repos\GuildPet\GuildPet\obj\Release\net6.0-windows\GuildPet.dll
+C:\Users\timbi\source\repos\GuildPet\GuildPet\obj\Release\net6.0-windows\ref\GuildPet.dll
+C:\Users\timbi\source\repos\GuildPet\GuildPet\obj\Release\net6.0-windows\GuildPet.pdb
+C:\Users\timbi\source\repos\GuildPet\GuildPet\obj\Release\net6.0-windows\GuildPet.genruntimeconfig.cache
