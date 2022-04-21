@@ -98,18 +98,23 @@ namespace GuildPet
             }
         }
         private void calcPets() {
-            generatePlayers();
-            this.strPet = getPet(this.playerList, 1);
-            this.dexPet = getPet(this.playerList, 2);
-            this.intPet = getPet(this.playerList, 3);
-
-            petStrength.Text = this.strPet.toString();
-            petDexterity.Text = this.dexPet.toString();
-            petIntelligence.Text = this.intPet.toString();
+            if (!input.Text.Contains("["))
+            {
+                getPetFromInput();
+            }
+            else
+            {
+                generatePlayers();
+                this.strPet = getPet(this.playerList, 1);
+                this.dexPet = getPet(this.playerList, 2);
+                this.intPet = getPet(this.playerList, 3);
+            }
+                     
         }
         private void calcPet_Click(object sender, EventArgs e)            
         {
             calcPets();
+            petInput.Text = this.strPet.toString() + this.dexPet.toString() + this.intPet.toString();
         }
         private string playerListToString(Player[] players) {
             string res = "";
@@ -186,6 +191,28 @@ namespace GuildPet
                     break;
             }
             return new Player(name, level, mainToClass(main), mindmg, maxdmg, strength, dexterity, intelligence, constitution, luck);
+        }
+
+        private void getPetFromInput() {
+            string[] val = input.Text.Split(',');
+            int level = Int32.Parse(val[0]);
+            int stat1 = Int32.Parse(val[1]);
+            int stat2 = Int32.Parse(val[2]);
+            int stat3 = Int32.Parse(val[3]);
+            int con = Int32.Parse(val[4]);
+            int luck = Int32.Parse(val[5]);
+            int main, side1, side2;
+
+            main = max(stat1, stat2, stat3);
+            side1 = mid(stat1, stat2, stat3);
+            side2 = min(stat1, stat2, stat3);
+
+            this.strPet = new Player("StrPet", level, 1, (level + 1) * 2, (level + 1) * 2, main, side1, side2, con, luck);
+
+            this.intPet = new Player("IntPet", level, 2, (int)((level + 1) * 4.5), (int)((level + 1) * 4.5), side1, side2, main, con, luck);
+
+            this.dexPet = new Player("DexPet", level, 3, (int)((level + 1) * 2.5), (int)((level + 1) * 2.5), side1, main, side2, con, luck);
+
         }
         private Player[] getSortedList(Player[] players)
         {
@@ -285,6 +312,18 @@ namespace GuildPet
             intOutput1.Text = won[2] + "%";
             intOutput2.Text = Math.Round((100.0f * avrgRestHp[2] / hydra.Hp), 2) + "%";
             intOutput3.Text = "" + Math.Round(playersNeeded[2], 2);
+        }
+
+        public int max(int a, int b, int c) {
+            return Math.Max(a, Math.Max(b, c));
+        }
+        public int mid(int a, int b, int c)
+        {
+            return Math.Max(Math.Min(a, b), Math.Min(Math.Max(a, b), c));
+        }
+        public int min(int a, int b, int c)
+        {
+            return Math.Min(a, Math.Min(b, c));
         }
     }
 }

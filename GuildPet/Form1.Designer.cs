@@ -29,10 +29,8 @@
         private void InitializeComponent()
         {
             this.input = new System.Windows.Forms.TextBox();
-            this.calcPet = new System.Windows.Forms.Button();
-            this.petDexterity = new System.Windows.Forms.TextBox();
-            this.petStrength = new System.Windows.Forms.TextBox();
-            this.petIntelligence = new System.Windows.Forms.TextBox();
+            this.showPets = new System.Windows.Forms.Button();
+            this.petInput = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -67,45 +65,29 @@
             this.input.Size = new System.Drawing.Size(704, 67);
             this.input.TabIndex = 1;
             // 
-            // calcPet
+            // showPets
             // 
-            this.calcPet.Location = new System.Drawing.Point(484, 106);
-            this.calcPet.Name = "calcPet";
-            this.calcPet.Size = new System.Drawing.Size(98, 23);
-            this.calcPet.TabIndex = 5;
-            this.calcPet.Text = "Calc Pets";
-            this.calcPet.UseVisualStyleBackColor = true;
-            this.calcPet.Click += new System.EventHandler(this.calcPet_Click);
+            this.showPets.Location = new System.Drawing.Point(197, 148);
+            this.showPets.Name = "showPets";
+            this.showPets.Size = new System.Drawing.Size(98, 23);
+            this.showPets.TabIndex = 5;
+            this.showPets.Text = "Show Pets";
+            this.showPets.UseVisualStyleBackColor = true;
+            this.showPets.Click += new System.EventHandler(this.calcPet_Click);
             // 
-            // petDexterity
+            // petInput
             // 
-            this.petDexterity.Location = new System.Drawing.Point(424, 146);
-            this.petDexterity.Multiline = true;
-            this.petDexterity.Name = "petDexterity";
-            this.petDexterity.Size = new System.Drawing.Size(214, 50);
-            this.petDexterity.TabIndex = 6;
-            // 
-            // petStrength
-            // 
-            this.petStrength.Location = new System.Drawing.Point(187, 146);
-            this.petStrength.Multiline = true;
-            this.petStrength.Name = "petStrength";
-            this.petStrength.Size = new System.Drawing.Size(192, 50);
-            this.petStrength.TabIndex = 7;
-            // 
-            // petIntelligence
-            // 
-            this.petIntelligence.Location = new System.Drawing.Point(689, 146);
-            this.petIntelligence.Multiline = true;
-            this.petIntelligence.Name = "petIntelligence";
-            this.petIntelligence.Size = new System.Drawing.Size(200, 50);
-            this.petIntelligence.TabIndex = 9;
+            this.petInput.Location = new System.Drawing.Point(321, 131);
+            this.petInput.Multiline = true;
+            this.petInput.Name = "petInput";
+            this.petInput.Size = new System.Drawing.Size(570, 50);
+            this.petInput.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.Location = new System.Drawing.Point(247, 233);
+            this.label3.Location = new System.Drawing.Point(240, 345);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 21);
             this.label3.TabIndex = 12;
@@ -115,7 +97,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.Location = new System.Drawing.Point(500, 233);
+            this.label4.Location = new System.Drawing.Point(493, 345);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(72, 21);
             this.label4.TabIndex = 13;
@@ -125,7 +107,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.Location = new System.Drawing.Point(753, 233);
+            this.label5.Location = new System.Drawing.Point(746, 345);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(89, 21);
             this.label5.TabIndex = 15;
@@ -137,7 +119,7 @@
             this.hydraHeads.Name = "hydraHeads";
             this.hydraHeads.Size = new System.Drawing.Size(39, 23);
             this.hydraHeads.TabIndex = 16;
-            this.hydraHeads.Text = "20";
+            this.hydraHeads.Text = "18";
             // 
             // hydraText
             // 
@@ -168,7 +150,7 @@
             // simulate
             // 
             this.simulate.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.simulate.Location = new System.Drawing.Point(424, 296);
+            this.simulate.Location = new System.Drawing.Point(421, 256);
             this.simulate.Name = "simulate";
             this.simulate.Size = new System.Drawing.Size(214, 44);
             this.simulate.TabIndex = 20;
@@ -321,10 +303,8 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.petIntelligence);
-            this.Controls.Add(this.petStrength);
-            this.Controls.Add(this.petDexterity);
-            this.Controls.Add(this.calcPet);
+            this.Controls.Add(this.petInput);
+            this.Controls.Add(this.showPets);
             this.Controls.Add(this.input);
             this.Name = "Form1";
             this.Text = "Hydra Simulator";
@@ -335,10 +315,8 @@
 
         #endregion
         private TextBox input;
-        private Button calcPet;
-        private TextBox petDexterity;
-        private TextBox petStrength;
-        private TextBox petIntelligence;
+        private Button showPets;
+        private TextBox petInput;
         private Label label3;
         private Label label4;
         private Label label5;

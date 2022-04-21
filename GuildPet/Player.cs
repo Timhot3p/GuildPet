@@ -74,10 +74,58 @@ namespace GuildPet
                     this.hp = (long)constitution * 5 * (level + 1);
                     this.armor = 50 * level;
                     break;
+                default: 
+                    this.hp = 0;
+                    this.armor = 0;
+                    break;
+            }
+        }
+
+        public Player(string name, int level, int cls, int mindmg, int maxdmg, int strength, int dexterity, int intelligence, int constitution, int luck, int armor)
+        {
+            this.name = name;
+            this.level = level;
+            this.cls = cls;
+            this.mindmg = mindmg;
+            this.maxdmg = maxdmg;
+            this.strength = strength;
+            this.dexterity = dexterity;
+            this.intelligence = intelligence;
+            this.constitution = constitution;
+            this.luck = luck;
+            this.armor = armor;
+            switch (cls)
+            {
+                case 1:
+                    this.hp = (long)constitution * 5 * (level + 1);
+                    break;
+                case 2:
+                    this.hp = (long)constitution * 2 * (level + 1);
+                    break;
+                case 3:
+                    this.hp = (long)constitution * 4 * (level + 1);
+                    break;
+                case 4:
+                    this.hp = (long)constitution * 4 * (level + 1);
+                    break;
+                case 5:
+                    this.hp = (long)constitution * 5 * (level + 1);
+                    break;
+                case 6:
+                    this.hp = (long)constitution * 4 * (level + 1);
+                    break;
+                case 7:
+                    this.hp = (long)constitution * 4 * (level + 1);
+                    break;
+                case 8:
+                    this.hp = (long)constitution * 4 * (level + 1);
+                    break;
+                case 9:
+                    this.hp = (long)constitution * 5 * (level + 1);
+                    break;
                 default: this.hp = 0; break;
             }
-        }  
-
+        }
         public Player(string name, int level, int cls, int mindmg, int maxdmg, int strength, int dexterity, int intelligence, int constitution, int luck, long hp, int armor)
         {
             this.name = name;

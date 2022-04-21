@@ -90,9 +90,8 @@ namespace GuildPet
                 int baseDmg = this.mindmgA + (int)(rng() * (this.maxdmgA - this.mindmgA));
                 int crit = (rng() > 0.5) ? 2 : 1;
                 int totaldamage = (int) (baseDmg * crit * (1.0f + this.round / 6.0f) * (1 - this.redB));
-                this.restHpB -= totaldamage;
-
-                //Debug.WriteLine(round + ": " + playerA.Name + " to " + playerB.Name + ": " + totaldamage + " (" + (crit > 1) + ")");
+                this.restHpB -= totaldamage;               
+                // Debug.WriteLine(round + ": " + playerA.Name + " to " + playerB.Name + ": " + totaldamage + " (" + (crit > 1) + ")");
             }
             else
             {
@@ -248,12 +247,17 @@ namespace GuildPet
             int wpndmg = max ? attacker.MaxDmg : attacker.MinDmg;            
             int reducedMain = getReducedMain(attacker, defender); 
             damage = wpndmg * (reducedMain/10 + 1);
+
             if (attacker.Cls == 4) {
-                damage = (int) (damage * 0.625);
+                damage = (int)(damage * 0.625);
+            }
+            else if (attacker.Cls == 6) {
+                damage = (int)(damage * 1.25);
             }
             else if (attacker.Cls == 2 && defender.Cls == 6) {
                 damage *= 2;
             }
+
             return damage;
         }                  
         public static long getFireballDmg(Player attacker, Player defender)            
