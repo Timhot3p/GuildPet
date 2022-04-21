@@ -110,12 +110,7 @@ namespace GuildPet
                 this.intPet = getPet(this.playerList, 3);
             }
                      
-        }
-        private void calcPet_Click(object sender, EventArgs e)            
-        {
-            calcPets();
-            petInput.Text = this.strPet.toString() + this.dexPet.toString() + this.intPet.toString();
-        }
+        }       
         private string playerListToString(Player[] players) {
             string res = "";
             for (int i = 0; i < players.Length; i++) {
