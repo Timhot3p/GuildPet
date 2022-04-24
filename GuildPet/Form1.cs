@@ -51,20 +51,7 @@ namespace GuildPet
                 this.playerList[p] = new Player(name, level, cls, 0, 0, strength, dexterity, intelligence, constitution, luck);
             }
         }
-        public int classToMain(int cls) {
-            switch (cls) { 
-                case 1: return 1;
-                case 2: return 3;
-                case 3: return 2;
-                case 4: return 2;
-                case 5: return 1;
-                case 6: return 1;
-                case 7: return 2;
-                case 8: return 3;
-                case 9: return 3;
-                default: return 0;
-            }
-        }
+       
         public int mainToClass(int main) {
             switch (main) {
                 case 1: return 1;
@@ -72,31 +59,7 @@ namespace GuildPet
                 case 3: return 2;
                 default: return 0;
             }
-        }
-        public float getWpnScl(int cls) {
-            switch (cls)
-            {
-                case 1: return 2.0f;
-
-                case 2: return 4.5f;
-
-                case 3: return 2.5f;
-
-                case 4: return 2.0f;
-
-                case 5: return 2.0f;
-
-                case 6: return 2.0f;
-
-                case 7: return 2.5f;
-
-                case 8: return 4.5f;
-
-                case 9: return 4.5f;
-
-                default: return 0.0f;
-            }
-        }
+        }        
         private void calcPets() {
             if (!input.Text.Contains("["))
             {
@@ -155,6 +118,8 @@ namespace GuildPet
             level = level / 25;
             constitution = constitution / 10;
             luck = luck / 10;
+            mindmg = (int) ((level + 1) * Classes.getWpnScl(mainToClass(main)));
+            maxdmg = (int) ((level + 1) * Classes.getWpnScl(mainToClass(main)));
 
             switch (main)
             {
@@ -162,25 +127,19 @@ namespace GuildPet
                     name = "StrPet";
                     strength = mainstat / 10;
                     dexterity = sidestat1 / 10;
-                    intelligence = sidestat2 / 10;
-                    mindmg = (int) ((level + 1) * 2);
-                    maxdmg = (int) ((level + 1) * 2);
+                    intelligence = sidestat2 / 10;                   
                     break;
                 case 2:
                     name = "DexPet";
                     strength = sidestat1 / 10;
                     dexterity = mainstat / 10;
-                    intelligence = sidestat2 / 10;
-                    mindmg = (int) ((level + 1) * 2.5);
-                    maxdmg = (int) ((level + 1) * 2.5);
+                    intelligence = sidestat2 / 10;                   
                     break;
                 case 3:
                     name = "IntPet";
                     strength = sidestat1 / 10;
                     dexterity = sidestat2 / 10;
-                    intelligence = mainstat / 10;
-                    mindmg = (int) ((level + 1) * 4.5);
-                    maxdmg = (int) ((level + 1) * 4.5);
+                    intelligence = mainstat / 10;                    
                     break;
                 default:
                     break;

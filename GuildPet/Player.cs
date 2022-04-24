@@ -36,49 +36,8 @@ namespace GuildPet
             this.intelligence = intelligence;
             this.constitution = constitution;
             this.luck = luck;
-            switch (cls)
-            {
-                case 1:
-                    this.hp = (long)constitution * 5 * (level + 1);
-                    this.armor = 50 * level;
-                    break;
-                case 2:
-                    this.hp = (long)constitution * 2 * (level + 1);
-                    this.armor = 10 * level;
-                    break;
-                case 3:
-                    this.hp = (long)constitution * 4 * (level + 1);
-                    this.armor = 25 * level;
-                    break;
-                case 4:
-                    this.hp = (long)constitution * 4 * (level + 1);
-                    this.armor = 25 * level;
-                    break;
-                case 5:
-                    this.hp = (long)constitution * 5 * (level + 1);
-                    this.armor = 10 * level;
-                    break;
-                case 6:
-                    this.hp = (long)constitution * 4 * (level + 1);
-                    this.armor = 50 * level;
-                    break;
-                case 7:
-                    this.hp = (long)constitution * 4 * (level + 1);
-                    this.armor = 50 * level;
-                    break;
-                case 8:
-                    this.hp = (long)constitution * 4 * (level + 1);
-                    this.armor = 25 * level;
-                    break;
-                case 9:
-                    this.hp = (long)constitution * 5 * (level + 1);
-                    this.armor = 50 * level;
-                    break;
-                default: 
-                    this.hp = 0;
-                    this.armor = 0;
-                    break;
-            }
+            this.hp = (long)constitution * Classes.getHpFactor(cls) * (level + 1);
+            this.armor = Classes.getMaxArmor(cls) * level;            
         }
 
         public Player(string name, int level, int cls, int mindmg, int maxdmg, int strength, int dexterity, int intelligence, int constitution, int luck, int armor)
@@ -93,38 +52,8 @@ namespace GuildPet
             this.intelligence = intelligence;
             this.constitution = constitution;
             this.luck = luck;
-            this.armor = armor;
-            switch (cls)
-            {
-                case 1:
-                    this.hp = (long)constitution * 5 * (level + 1);
-                    break;
-                case 2:
-                    this.hp = (long)constitution * 2 * (level + 1);
-                    break;
-                case 3:
-                    this.hp = (long)constitution * 4 * (level + 1);
-                    break;
-                case 4:
-                    this.hp = (long)constitution * 4 * (level + 1);
-                    break;
-                case 5:
-                    this.hp = (long)constitution * 5 * (level + 1);
-                    break;
-                case 6:
-                    this.hp = (long)constitution * 4 * (level + 1);
-                    break;
-                case 7:
-                    this.hp = (long)constitution * 4 * (level + 1);
-                    break;
-                case 8:
-                    this.hp = (long)constitution * 4 * (level + 1);
-                    break;
-                case 9:
-                    this.hp = (long)constitution * 5 * (level + 1);
-                    break;
-                default: this.hp = 0; break;
-            }
+            this.armor = armor;           
+            this.hp = (long)constitution * Classes.getHpFactor(cls) * (level + 1);
         }
         public Player(string name, int level, int cls, int mindmg, int maxdmg, int strength, int dexterity, int intelligence, int constitution, int luck, long hp, int armor)
         {
@@ -232,28 +161,7 @@ namespace GuildPet
             }
         }
         public String getClassName() {
-            switch (this.cls)
-            {
-                case 1: return "Warrior";
-
-                case 2: return "Mage";
-
-                case 3: return "Scout";
-
-                case 4: return "Assassin";
-
-                case 5: return "Battle Mage";
-
-                case 6: return "Berserker";
-
-                case 7: return "Demon Hunter";
-
-                case 8: return "Cat-Druid";
-
-                case 9: return "Bear-Druid";
-
-                default: return "None";
-            }
+            return Classes.getName(this.cls);
         }
         public String toString()
         {

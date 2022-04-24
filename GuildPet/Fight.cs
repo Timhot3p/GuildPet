@@ -191,20 +191,7 @@ namespace GuildPet
             }
             else
             {
-                switch (defender.Cls)
-                {
-                    case 1: return 0.25f;
-                    case 2: return 0;
-                    case 3: return 0.5f;
-                    case 4: return 0.5f;
-                    case 5: return 0;
-                    case 6: return 0.5f;
-                    case 7: return 0;
-                    case 8: return 0.5f;
-                    case 9: return 0.25f;
-                    default: return 0.0f;
-
-                }
+                return Classes.getDodgeChances(defender.Cls);               
             }
         }
 
