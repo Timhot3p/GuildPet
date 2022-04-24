@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.input = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@
             this.iterationsInput = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.hydraHeads = new System.Windows.Forms.NumericUpDown();
+            this.inputInfo = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.hydraHeads)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,6 +65,7 @@
             this.input.Name = "input";
             this.input.Size = new System.Drawing.Size(733, 67);
             this.input.TabIndex = 1;
+            this.input.MouseHover += new System.EventHandler(this.input_MouseHover);
             // 
             // label3
             // 
@@ -229,6 +232,7 @@
             this.label7.Size = new System.Drawing.Size(56, 15);
             this.label7.TabIndex = 33;
             this.label7.Text = "Iterations";
+            this.label7.MouseHover += new System.EventHandler(this.label7_MouseHover);
             // 
             // iterationsInput
             // 
@@ -237,6 +241,7 @@
             this.iterationsInput.Size = new System.Drawing.Size(39, 23);
             this.iterationsInput.TabIndex = 34;
             this.iterationsInput.Text = "100";
+            this.iterationsInput.MouseHover += new System.EventHandler(this.iterationsInput_MouseHover);
             // 
             // label8
             // 
@@ -247,10 +252,11 @@
             this.label8.Size = new System.Drawing.Size(46, 21);
             this.label8.TabIndex = 35;
             this.label8.Text = "Input";
+            this.label8.MouseHover += new System.EventHandler(this.label8_MouseHover);
             // 
             // hydraHeads
             // 
-            this.hydraHeads.Location = new System.Drawing.Point(106, 130);
+            this.hydraHeads.Location = new System.Drawing.Point(106, 128);
             this.hydraHeads.Maximum = new decimal(new int[] {
             20,
             0,
@@ -333,5 +339,6 @@
         private TextBox iterationsInput;
         private Label label8;
         private NumericUpDown hydraHeads;
+        private ToolTip inputInfo;
     }
 }

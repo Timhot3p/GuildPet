@@ -321,9 +321,24 @@ namespace GuildPet
             return Math.Min(a, Math.Min(b, c));
         }
 
-        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        private void input_MouseHover(object sender, EventArgs e)
         {
+            inputInfo.Show("Input your data via 'copy for fight simulator' or manually: level,strength,dexterity,intelligence,constitution,luck", input);
+        }
 
+        private void label8_MouseHover(object sender, EventArgs e)
+        {
+            inputInfo.Show("Input your data via 'copy for fight simulator' or manually: level,strength,dexterity,intelligence,constitution,luck", label8);
+        }
+
+        private void label7_MouseHover(object sender, EventArgs e)
+        {
+            inputInfo.Show("Number of simulated fights", label7);
+        }
+
+        private void iterationsInput_MouseHover(object sender, EventArgs e)
+        {
+            inputInfo.Show("Number of simulated fights", iterationsInput);
         }
     }
 }
