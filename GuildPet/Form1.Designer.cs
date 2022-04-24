@@ -32,7 +32,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.hydraHeads = new System.Windows.Forms.TextBox();
             this.hydraText = new System.Windows.Forms.Label();
             this.playersText = new System.Windows.Forms.Label();
             this.playersInput = new System.Windows.Forms.TextBox();
@@ -52,6 +51,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.iterationsInput = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.hydraHeads = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.hydraHeads)).BeginInit();
             this.SuspendLayout();
             // 
             // input
@@ -92,14 +93,6 @@
             this.label5.Size = new System.Drawing.Size(89, 21);
             this.label5.TabIndex = 15;
             this.label5.Text = "Intelligence";
-            // 
-            // hydraHeads
-            // 
-            this.hydraHeads.Location = new System.Drawing.Point(106, 127);
-            this.hydraHeads.Name = "hydraHeads";
-            this.hydraHeads.Size = new System.Drawing.Size(39, 23);
-            this.hydraHeads.TabIndex = 16;
-            this.hydraHeads.Text = "18";
             // 
             // hydraText
             // 
@@ -255,12 +248,30 @@
             this.label8.TabIndex = 35;
             this.label8.Text = "Input";
             // 
+            // hydraHeads
+            // 
+            this.hydraHeads.Location = new System.Drawing.Point(106, 130);
+            this.hydraHeads.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.hydraHeads.Name = "hydraHeads";
+            this.hydraHeads.Size = new System.Drawing.Size(39, 23);
+            this.hydraHeads.TabIndex = 36;
+            this.hydraHeads.Value = new decimal(new int[] {
+            18,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(867, 422);
+            this.Controls.Add(this.hydraHeads);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.iterationsInput);
             this.Controls.Add(this.label7);
@@ -280,7 +291,6 @@
             this.Controls.Add(this.playersInput);
             this.Controls.Add(this.playersText);
             this.Controls.Add(this.hydraText);
-            this.Controls.Add(this.hydraHeads);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -292,6 +302,7 @@
             this.Name = "Form1";
             this.Text = "Hydra Simulator";
             this.TopMost = true;
+            ((System.ComponentModel.ISupportInitialize)(this.hydraHeads)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -302,7 +313,6 @@
         private Label label3;
         private Label label4;
         private Label label5;
-        private TextBox hydraHeads;
         private Label hydraText;
         private Label playersText;
         private TextBox playersInput;
@@ -322,5 +332,6 @@
         private Label label7;
         private TextBox iterationsInput;
         private Label label8;
+        private NumericUpDown hydraHeads;
     }
 }

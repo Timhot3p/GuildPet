@@ -320,5 +320,10 @@ namespace GuildPet
         {
             return Math.Min(a, Math.Min(b, c));
         }
+
+        private void toolTip1_Popup(object sender, PopupEventArgs e)
+        {
+
+        }
     }
 }
