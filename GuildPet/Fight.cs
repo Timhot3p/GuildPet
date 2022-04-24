@@ -87,7 +87,8 @@ namespace GuildPet
                 int crit = (rng() > 0.5) ? 2 : 1;
                 int totaldamage = (int) (baseDmg * crit * (1.0f + this.round / 6.0f) * (1 - this.redB));
                 this.restHpB -= totaldamage;               
-            }            
+            } 
+            if(this.playerA.Cls == 4) { this.round++;  }
         }
         private void bHitsa() {
             if (rng() > this.dodgeA)
@@ -97,6 +98,7 @@ namespace GuildPet
                 int totaldamage = (int) (baseDmg * crit * (1.0f + this.round / 6.0f) * (1 - this.redA));
                 this.restHpA -= totaldamage;
             }
+            if (this.playerB.Cls == 4) { this.round++; }
         }
         private bool hasEnded() {
             if (restHpA <= 0) {
