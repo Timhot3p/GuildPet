@@ -68,8 +68,6 @@ namespace GuildPet
                 long fireball1 = getFireballDmg(this.playerB, this.playerA);
                 this.restHpA -= fireball1;
 
-               //Debug.WriteLine(round + ": " + playerB.Name + " fireballs " + playerA.Name + ": " + fireball1);
-
                 this.round++;
 
             }
@@ -77,8 +75,6 @@ namespace GuildPet
             {
                 long fireball2 = getFireballDmg(this.playerA, this.playerB);
                 this.restHpB -= fireball2;
-
-                //Debug.WriteLine(round + ": " + playerA.Name + " fireballs " + playerB.Name + ": " + fireball2);
 
                 this.round++;
 
@@ -91,12 +87,7 @@ namespace GuildPet
                 int crit = (rng() > 0.5) ? 2 : 1;
                 int totaldamage = (int) (baseDmg * crit * (1.0f + this.round / 6.0f) * (1 - this.redB));
                 this.restHpB -= totaldamage;               
-                // Debug.WriteLine(round + ": " + playerA.Name + " to " + playerB.Name + ": " + totaldamage + " (" + (crit > 1) + ")");
-            }
-            else
-            {
-                //Debug.WriteLine(round + ": " + playerB.Name + " dodges " + playerA.Name);
-            }
+            }            
         }
         private void bHitsa() {
             if (rng() > this.dodgeA)
@@ -105,12 +96,6 @@ namespace GuildPet
                 int crit = (rng() > 0.5) ? 2 : 1;
                 int totaldamage = (int) (baseDmg * crit * (1.0f + this.round / 6.0f) * (1 - this.redA));
                 this.restHpA -= totaldamage;
-
-               //Debug.WriteLine(round + ": " + playerB.Name + " to " + playerA.Name + ": " + totaldamage + " (" + (crit > 1) + ")");
-            }
-            else
-            {
-                //Debug.WriteLine(round + ": " + playerA.Name + " dodges " + playerB.Name);
             }
         }
         private bool hasEnded() {
@@ -163,7 +148,6 @@ namespace GuildPet
             this.round++;
         }
         public (bool winA, long hpWinner) doFight() {
-            //Debug.WriteLine("Armor: " + this.playerA.Name + ": " + this.redA + ", " + playerB.Name + ": " + this.redB);
             executeFireball();
             while (!hasEnded()) {
                 nextHit();
@@ -262,7 +246,7 @@ namespace GuildPet
         }                  
         public static long getFireballDmg(Player attacker, Player defender)            
         {
-            if (attacker.Cls == 5 & defender.Cls != 2 && defender.Cls != 5) {
+            if (attacker.Cls == 5 && defender.Cls != 2 && defender.Cls != 5) {
                 switch (defender.Cls) {
                     case 1: return (long)Math.Min((0.33 * defender.Hp), (0.25 * attacker.Hp));
                     case 3: return (long)Math.Min((0.33 * defender.Hp), (0.20 * attacker.Hp));
