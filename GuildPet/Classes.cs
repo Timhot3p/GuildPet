@@ -6,60 +6,10 @@ using System.Threading.Tasks;
 
 namespace GuildPet
 {
+    //contains methods that return constant class-specific values
     public class Classes
     {
-        public static int getHpFactor(int cls)
-        {
-            switch (cls)
-            {
-                case 1: return 5;
-
-                case 2: return 2;
-
-                case 3: return 4;
-
-                case 4: return 4;
-
-                case 5: return 5;
-
-                case 6: return 4;
-
-                case 7: return 4;
-
-                case 8: return 4;
-
-                case 9: return 5;
-
-                default: return 0;
-            }
-        }
-
-        public static int getMaxArmor(int cls)
-        {
-            switch (cls)
-            {
-                case 1: return 50;
-
-                case 2: return 10;
-
-                case 3: return 25;
-
-                case 4: return 25;
-
-                case 5: return 10;
-
-                case 6: return 50;
-
-                case 7: return 50;
-
-                case 8: return 25;
-
-                case 9: return 50;
-
-                default: return 0;
-            }
-        }
-
+        //returns the name of each class
         public static String getName(int cls)
         {
             switch (cls)
@@ -86,6 +36,62 @@ namespace GuildPet
 
             }
         }
+
+        //returns the hp factor of each class
+        public static int getHpFactor(int cls)
+        {
+            switch (cls)
+            {
+                case 1: return 5;
+
+                case 2: return 2;
+
+                case 3: return 4;
+
+                case 4: return 4;
+
+                case 5: return 5;
+
+                case 6: return 4;
+
+                case 7: return 4;
+
+                case 8: return 4;
+
+                case 9: return 5;
+
+                default: return 0;
+            }
+        }
+
+        //returns the max armor reduction (in %) for each class
+        public static int getMaxArmor(int cls)
+        {
+            switch (cls)
+            {
+                case 1: return 50;
+
+                case 2: return 10;
+
+                case 3: return 25;
+
+                case 4: return 25;
+
+                case 5: return 10;
+
+                case 6: return 50;
+
+                case 7: return 50;
+
+                case 8: return 25;
+
+                case 9: return 50;
+
+                default: return 0;
+            }
+        }        
+
+        //returns the scaling for the damage of weapons for each class
         public static float getWpnScl(int cls)
         {
             switch (cls)
@@ -112,6 +118,7 @@ namespace GuildPet
             }
         }
 
+        //returns the main stat of each class, with str = 1, dex = 2 and int = 3
         public static int classToMain(int cls)
         {
             switch (cls)
@@ -138,6 +145,7 @@ namespace GuildPet
             }
         }
 
+        //returns the basic dodge (block, multi attack) chances of each class
         public static float getDodgeChances(int cls)
         {
             switch (cls)

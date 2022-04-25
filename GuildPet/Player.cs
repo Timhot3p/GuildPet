@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace GuildPet
 {
+    //represents a player
     public class Player
     {
         private string name;
@@ -24,6 +25,7 @@ namespace GuildPet
         private int luck;
         long hp;
 
+        //constructor without hp and armor, they will get set according to level
         public Player(string name, int level, int cls, int mindmg, int maxdmg, int strength, int dexterity, int intelligence, int constitution, int luck)
         {
             this.name = name;
@@ -40,6 +42,7 @@ namespace GuildPet
             this.armor = Classes.getMaxArmor(cls) * level;            
         }
 
+        //constructor without hp, will get set according to level
         public Player(string name, int level, int cls, int mindmg, int maxdmg, int strength, int dexterity, int intelligence, int constitution, int luck, int armor)
         {
             this.name = name;
@@ -55,6 +58,8 @@ namespace GuildPet
             this.armor = armor;           
             this.hp = (long)constitution * Classes.getHpFactor(cls) * (level + 1);
         }
+
+        //constructor where all values can be entered
         public Player(string name, int level, int cls, int mindmg, int maxdmg, int strength, int dexterity, int intelligence, int constitution, int luck, long hp, int armor)
         {
             this.name = name;
@@ -71,6 +76,7 @@ namespace GuildPet
             this.armor = armor;
         }
 
+        //getters and setters for each attribute
         public string Name { get => name; set => name = value; }
         public int Level { get => level; set => level = value; }
         public int MinDmg { get => mindmg; set => mindmg = value; }
@@ -84,6 +90,7 @@ namespace GuildPet
         public long Hp { get => hp; set => hp = value; }
         public int Armor { get => armor; set => armor = value; }
 
+        //returns the value of the main stat of this player
         public int getMainStat()
         {
             switch (this.cls)
@@ -110,6 +117,8 @@ namespace GuildPet
                 default: return 0;
             }
         }
+
+        //returns the value of the first attribute in the order str-dex-int that is not a main attribute for this player
         public int getSideStat1()
         {
             switch (this.cls)
@@ -135,6 +144,8 @@ namespace GuildPet
                 default: return 0;
             }
         }
+
+        //returns the value of the second attribute in the order str-dex-int that is not a main attribute for this player
         public int getSideStat2()
         {
             switch (this.cls)
@@ -160,9 +171,13 @@ namespace GuildPet
                 default: return 0;
             }
         }
+
+        //returns the name of this players class
         public String getClassName() {
             return Classes.getName(this.cls);
         }
+
+        //turns all the attributes of this player into a string and returns it
         public String toString()
         {
             return "Name: " + this.name + ", Level: " + this.level + ", Class: " + this.getClassName() + ", Weapon: " + this.mindmg + " - " + this.maxdmg + ", Strength: " + this.strength + ", Dexterity: " + this.dexterity + ", Intelligence: " + this.intelligence + ", Constitution: " + this.constitution + ", Luck: " + this.luck + ", Armor: " + this.armor + ", Hp: " + this.hp + System.Environment.NewLine;

@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace GuildPet
 {
+    //class solely for returning hydra values
     public class HydraGetter
     {
+        //returns a hydra with the given number of heads as a player in the format:
+        //new Player("Name", level, class, minWpnDmg, maxWpnDmg, strength, dexterity, intelligence, constitution, luck, hp, armor);
         public static Player getHydra(int heads)
         {
             switch (heads)
-            {
-                //new Player("Name", level, class, minWpnDmg, maxWpnDmg, strength, dexterity, intelligence, constitution, luck, hp, armor);
+            {               
                 case 1: return new Player("Head 1", 325, 1, 1118, 1891, 52800, 6720, 6720, 126000, 21600, 200000000, 50000);
 
                 case 2: return new Player("Head 2", 350, 1, 1190, 2004, 48416, 11972, 12081, 163332, 23725, 380000000, 50000);

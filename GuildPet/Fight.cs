@@ -7,6 +7,7 @@ using System.Diagnostics;
 
 namespace GuildPet
 {
+    //represents an instance of a fight
     internal class Fight {
         private Player playerA;
         private Player playerB;
@@ -22,6 +23,8 @@ namespace GuildPet
         private int maxdmgB;
         private bool turnA;
         private int round;
+        
+        //creates a fight between two players with full hp
         public Fight(Player playerA, Player playerB) {
             this.playerA = playerA;
             this.playerB = playerB;
@@ -33,6 +36,8 @@ namespace GuildPet
             this.turnA = (rng() > 0.5);
             this.round = 0;
         }
+
+        //creates a fight between two players with custom hp
         public Fight(Player playerA, Player playerB, long restHpA, long restHpB)
         {
             this.playerA = playerA;
@@ -45,23 +50,33 @@ namespace GuildPet
             this.turnA = (rng() > 0.5);
             this.round = 0;
         }
+
+        //returns a random float value between 0 and 1
         private float rng() {
             return (float)Random.Shared.NextDouble();
         }
+
+        //sets the damage reduction through armor for both players for this fight
         private void setDmgReductors() {
             this.redA = getDmgReduction(this.playerB, this.playerA);
             this.redB = getDmgReduction(this.playerA, this.playerB);
         }
+
+        //sets the dodge (block, multi attack) chances for both players for this fight
         private void setDodgeChances() {
             this.dodgeA = getDodgeChances(this.playerB, this.playerA);
             this.dodgeB = getDodgeChances(this.playerA, this.playerB);
         }
+
+        //sets the max and min damage values for both players for this fight, excluding crit bonus, armor reduction and round bonus
         private void setDamageRanges() {
             this.mindmgA = getMinMaxDamage(this.playerA, this.playerB, false);
             this.maxdmgA = getMinMaxDamage(this.playerA, this.playerB, true);
             this.mindmgB = getMinMaxDamage(this.playerB, this.playerA, false);
             this.maxdmgB = getMinMaxDamage(this.playerB, this.playerA, true);
         }
+
+        //executes fireballs if any of the players is a battle mage
         private void executeFireball() {
             if (this.playerB.Cls == 5)
             {
@@ -80,6 +95,8 @@ namespace GuildPet
 
             }
         }        
+
+        //executes a hit from playerA to playerB
         private void aHitsb() {
             if (rng() > this.dodgeB)
             {
@@ -90,6 +107,8 @@ namespace GuildPet
             } 
             if(this.playerA.Cls == 4) { this.round++;  }
         }
+
+        //executes a hit from playerB to playerA
         private void bHitsa() {
             if (rng() > this.dodgeA)
             {
@@ -100,6 +119,8 @@ namespace GuildPet
             }
             if (this.playerB.Cls == 4) { this.round++; }
         }
+
+        //checks if the fight has ended and check if a demon hunter revived
         private bool hasEnded() {
             if (restHpA <= 0) {
                 if (playerA.Cls == 7) {
@@ -120,6 +141,8 @@ namespace GuildPet
 
             return false;
         }
+
+        //rolls if a demon hunter revives and executes it if so
         private bool revived(bool playerA) {
             if (playerA && this.playerA.Cls == 7) {
                 if (rng() < 0.25) {
@@ -143,12 +166,16 @@ namespace GuildPet
 
             return false;
         }
+
+        //executes the next hit for this fight
         public void nextHit()
         {
             if (this.turnA) { aHitsb(); } else { bHitsa(); };
             this.turnA = !this.turnA;
             this.round++;
         }
+
+        //executes the next hit until one player is dead or 100 hits have been reached
         public (bool winA, long hpWinner) doFight() {
             executeFireball();
             while (!hasEnded()) {
@@ -159,6 +186,8 @@ namespace GuildPet
             long hpWinner = winA ? this.restHpA : this.restHpB;
             return (winA, hpWinner);
         }
+
+        //returns the total damage reduction of a player defender when attacked by a player attacker
         public static float getDmgReduction(Player attacker, Player defender) {
             if (attacker.Cls == 2)
             {
@@ -183,6 +212,7 @@ namespace GuildPet
             }
         }
 
+        //returns the dodge (block, multi attack) chances of a player defender when attacked by a player attacker
         public static float getDodgeChances(Player attacker, Player defender)
         {
             if (attacker.Cls == 2 && defender.Cls != 6)
@@ -195,6 +225,7 @@ namespace GuildPet
             }
         }
 
+        //returns the value of the stat that will reduce the main stat of the player attacker when attacking the player defender
         public static int getReducingStat(Player attacker, Player defender) {
             switch (attacker.Cls) {
                 case 1: return defender.Strength / 2;
@@ -210,11 +241,14 @@ namespace GuildPet
             }
         }
 
+        //returns the remaining main stat of a player attacker when attacking a player defender after main stat reduction
         public static int getReducedMain(Player attacker, Player defender) {
 
             int reducedMain = Math.Max(attacker.getMainStat() - getReducingStat(attacker, defender), attacker.getMainStat() / 2);          
             return reducedMain;
         }
+
+        //returns the min or max damage (depending on bool max) a player attacker can inflict on a player defender, excluding crit bonus, armor reduction and round bonus
         public static int getMinMaxDamage(Player attacker, Player defender, bool max) {
             int damage = 0;
             int wpndmg = max ? attacker.MaxDmg : attacker.MinDmg;            
@@ -233,6 +267,8 @@ namespace GuildPet
 
             return damage;
         }                  
+
+        //returns the fireball damage a player attacker will inflict on a player defender
         public static long getFireballDmg(Player attacker, Player defender)            
         {
             if (attacker.Cls == 5 && defender.Cls != 2 && defender.Cls != 5) {

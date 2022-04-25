@@ -15,6 +15,7 @@ namespace GuildPet
             InitializeComponent();
         }
 
+        //generates the players from the input string
         private void generatePlayers()
         {
             string[] players = input.Text.Split("},{");
@@ -52,6 +53,7 @@ namespace GuildPet
             }
         }
        
+        //returns one of the three main classes (for pets) from the main stat
         public int mainToClass(int main) {
             switch (main) {
                 case 1: return 1;
@@ -59,11 +61,13 @@ namespace GuildPet
                 case 3: return 2;
                 default: return 0;
             }
-        }        
+        }
+
+        //sets the three possible guild pets from the previously generated players
         private void calcPets() {
             if (!input.Text.Contains("["))
             {
-                getPetFromInput();
+                getPetsFromInput();
             }
             else
             {
@@ -74,6 +78,8 @@ namespace GuildPet
             }
                      
         }       
+
+        //turns a list of players into a string
         private string playerListToString(Player[] players) {
             string res = "";
             for (int i = 0; i < players.Length; i++) {
@@ -81,6 +87,8 @@ namespace GuildPet
             }
             return res;
         }
+
+        //calculates a guild pet with a certain main attribute from a list of players
         private Player getPet(Player[] players, int main)
         {
             string name = "NoPet";
@@ -147,7 +155,8 @@ namespace GuildPet
             return new Player(name, level, mainToClass(main), mindmg, maxdmg, strength, dexterity, intelligence, constitution, luck);
         }
 
-        private void getPetFromInput() {
+        //creates the three guild pets directly from the input
+        private void getPetsFromInput() {
             string[] val = input.Text.Split(',');
             int level = Int32.Parse(val[0]);
             int stat1 = Int32.Parse(val[1]);
@@ -168,6 +177,8 @@ namespace GuildPet
             this.dexPet = new Player("DexPet", level, 3, (int)((level + 1) * 2.5), (int)((level + 1) * 2.5), side1, main, side2, con, luck);
 
         }
+
+        //sorts the given list of players by their main attribute and returns the result
         private Player[] getSortedList(Player[] players)
         {
             if (players == null) { 
@@ -189,6 +200,7 @@ namespace GuildPet
             return list;
         }
 
+        //method executed by pressing the simulate button, calculates the pets and simulates fights against the given hydra, displays the results in the gui
         private void simulate_Click(object sender, EventArgs e)
         {
             calcPets();
@@ -268,33 +280,42 @@ namespace GuildPet
             intOutput3.Text = "" + Math.Round(playersNeeded[2], 2);
         }
 
+        //maximum of three numbers
         public int max(int a, int b, int c) {
             return Math.Max(a, Math.Max(b, c));
         }
+
+        //middle value of three numbers
         public int mid(int a, int b, int c)
         {
             return Math.Max(Math.Min(a, b), Math.Min(Math.Max(a, b), c));
         }
+
+        //minimum of three numbers
         public int min(int a, int b, int c)
         {
             return Math.Min(a, Math.Min(b, c));
         }
 
+        //info text for hovering over the input field
         private void input_MouseHover(object sender, EventArgs e)
         {
             inputInfo.Show("Input your data via 'copy for fight simulator' or manually: level,strength,dexterity,intelligence,constitution,luck", input);
         }
 
+        //info text for hovering over the input label
         private void label8_MouseHover(object sender, EventArgs e)
         {
             inputInfo.Show("Input your data via 'copy for fight simulator' or manually: level,strength,dexterity,intelligence,constitution,luck", label8);
         }
 
+        //info text for hovering over the iterations label
         private void label7_MouseHover(object sender, EventArgs e)
         {
             inputInfo.Show("Number of simulated fights", label7);
         }
 
+        //info text for hovering over the iterations field
         private void iterationsInput_MouseHover(object sender, EventArgs e)
         {
             inputInfo.Show("Number of simulated fights", iterationsInput);
